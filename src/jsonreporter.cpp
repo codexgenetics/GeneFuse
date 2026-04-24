@@ -19,9 +19,9 @@ extern string command;
 
 void JsonReporter::run() {
     mFile << "{" << endl;
-    mFile << "\t\"command\":\"" << command << "\"," << endl;
+    mFile << "\t\"command\":\"" << escapeJsonString(command) << "\"," << endl;
     mFile << "\t\"version\":\"" << FUSIONSCAN_VER << "\"," << endl;
-    mFile << "\t\"time\":\"" << getCurrentSystemTime() << "\"," << endl;
+    mFile << "\t\"time\":\"" << escapeJsonString(getCurrentSystemTime()) << "\"," << endl;
     mFile << "\t\"fusions\":{";
 
     bool isFirstMut = true;
@@ -42,25 +42,25 @@ void JsonReporter::run() {
         else
             mFile << "," << endl;
 
-        mFile << "\t\t\"" <<  fusion.mTitle << "\":{" << endl;
+        mFile << "\t\t\"" <<  escapeJsonString(fusion.mTitle) << "\":{" << endl;
             mFile << "\t\t\t\"" <<  "left" << "\":{" << endl;
-                mFile << "\t\t\t\t\"" <<  "gene_name" << "\":" << "\"" << fusion.mLeftGene.mName << "\"," << endl;
-                mFile << "\t\t\t\t\"" <<  "gene_chr" << "\":" << "\"" << fusion.mLeftGene.mChr << "\"," << endl;
+                mFile << "\t\t\t\t\"" <<  "gene_name" << "\":" << "\"" << escapeJsonString(fusion.mLeftGene.mName) << "\"," << endl;
+                mFile << "\t\t\t\t\"" <<  "gene_chr" << "\":" << "\"" << escapeJsonString(fusion.mLeftGene.mChr) << "\"," << endl;
                 mFile << "\t\t\t\t\"" <<  "position" << "\":" <<  fusion.mLeftGene.genePos2ChrPos(fusion.mLeftGP.position) << "," << endl;
-                mFile << "\t\t\t\t\"" <<  "reference" << "\":" << "\"" << fusion.mLeftRef << "\"," << endl;
-                mFile << "\t\t\t\t\"" <<  "ref_ext" << "\":" << "\"" << fusion.mLeftRefExt << "\"," << endl;
-                mFile << "\t\t\t\t\"" <<  "pos_str" << "\":" << "\"" << fusion.mLeftPos << "\"," << endl;
+                mFile << "\t\t\t\t\"" <<  "reference" << "\":" << "\"" << escapeJsonString(fusion.mLeftRef) << "\"," << endl;
+                mFile << "\t\t\t\t\"" <<  "ref_ext" << "\":" << "\"" << escapeJsonString(fusion.mLeftRefExt) << "\"," << endl;
+                mFile << "\t\t\t\t\"" <<  "pos_str" << "\":" << "\"" << escapeJsonString(fusion.mLeftPos) << "\"," << endl;
                 mFile << "\t\t\t\t\"" <<  "exon_or_intron" << "\":" << "\"" << (fusion.mLeftIsExon?"exon":"intron") << "\"," << endl;
                 mFile << "\t\t\t\t\"" <<  "exon_or_intron_id" << "\":" << fusion.mLeftExonOrIntronID << "," << endl;
                 mFile << "\t\t\t\t\"" <<  "strand" << "\":" << "\"" << (fusion.isLeftProteinForward()?"forward":"reversed") << "\"" << endl;
             mFile << "\t\t\t}, " << endl;
             mFile << "\t\t\t\"" <<  "right" << "\":{" << endl;
-                mFile << "\t\t\t\t\"" <<  "gene_name" << "\":" << "\"" << fusion.mRightGene.mName << "\"," << endl;
-                mFile << "\t\t\t\t\"" <<  "gene_chr" << "\":" << "\"" << fusion.mRightGene.mChr << "\"," << endl;
+                mFile << "\t\t\t\t\"" <<  "gene_name" << "\":" << "\"" << escapeJsonString(fusion.mRightGene.mName) << "\"," << endl;
+                mFile << "\t\t\t\t\"" <<  "gene_chr" << "\":" << "\"" << escapeJsonString(fusion.mRightGene.mChr) << "\"," << endl;
                 mFile << "\t\t\t\t\"" <<  "position" << "\":" << fusion.mRightGene.genePos2ChrPos(fusion.mRightGP.position) << "," << endl;
-                mFile << "\t\t\t\t\"" <<  "reference" << "\":" << "\"" << fusion.mRightRef << "\"," << endl;
-                mFile << "\t\t\t\t\"" <<  "ref_ext" << "\":" << "\"" << fusion.mRightRefExt << "\"," << endl;
-                mFile << "\t\t\t\t\"" <<  "pos_str" << "\":" << "\"" << fusion.mRightPos << "\"," << endl;
+                mFile << "\t\t\t\t\"" <<  "reference" << "\":" << "\"" << escapeJsonString(fusion.mRightRef) << "\"," << endl;
+                mFile << "\t\t\t\t\"" <<  "ref_ext" << "\":" << "\"" << escapeJsonString(fusion.mRightRefExt) << "\"," << endl;
+                mFile << "\t\t\t\t\"" <<  "pos_str" << "\":" << "\"" << escapeJsonString(fusion.mRightPos) << "\"," << endl;
                 mFile << "\t\t\t\t\"" <<  "exon_or_intron" << "\":" << "\"" << (fusion.mRightIsExon?"exon":"intron") << "\"," << endl;
                 mFile << "\t\t\t\t\"" <<  "exon_or_intron_id" << "\":" << fusion.mRightExonOrIntronID << "," << endl;
                 mFile << "\t\t\t\t\"" <<  "strand" << "\":" << "\"" << (fusion.isRightProteinForward()?"forward":"reversed") << "\"" << endl;

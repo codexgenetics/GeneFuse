@@ -1,6 +1,8 @@
 #ifndef COMMON_H
 #define COMMON_H
 
+#include <string>
+
 #define FUSIONSCAN_VER "0.8.0"
 
 #define _DEBUG true
@@ -42,5 +44,6 @@ static const int PACK_IN_MEM_LIMIT = 100;
 static const int DUPE_NORMAL_LEVEL = -1;
 static const int DUPE_HIGH_LEVEL = -2;
 
+std::string escapeJsonString(const std::string& input);
 
 #endif /* COMMON_H */

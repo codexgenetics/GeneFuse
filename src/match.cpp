@@ -89,6 +89,6 @@ int Match::countUnique(vector<Match*>& matches) {
 }
 
 void Match::printReadToJson(ofstream& file, string pad) {
-    file << pad << "\"seq\":" << "\"" <<  mRead->mSeq.mStr << "\"," << endl;
-    file << pad << "\"qual\":" << "\"" <<  mRead->mQuality << "\"" << endl;
+    file << pad << "\"seq\":" << "\"" <<  escapeJsonString(mRead->mSeq.mStr) << "\"," << endl;
+    file << pad << "\"qual\":" << "\"" <<  escapeJsonString(mRead->mQuality) << "\"" << endl;
 }
